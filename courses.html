@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses | MIT Polytechnic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Courses page: full detail cards */
+    .course-detail-card {
+      background: var(--white);
+      border: 1px solid var(--gray-2);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: 280px 1fr;
+    }
+
+    .cdc-sidebar {
+      padding: 2.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cdc-sidebar .c-emoji { font-size: 3rem; margin-bottom: 4px; }
+    .cdc-sidebar h2 { font-size: 1.4rem; margin-bottom: 4px; color: var(--white); }
+    .cdc-sidebar .c-code { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); font-weight: 600; }
+
+    .cdc-meta { display: flex; flex-direction: column; gap: 8px; margin-top: auto; }
+    .cdc-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .cdc-meta-item strong { color: var(--white); }
+
+    .cdc-body { padding: 2.25rem 2rem; border-left: 1px solid var(--gray-2); }
+    .cdc-body > p { font-size: 0.97rem; line-height: 1.75; margin-bottom: 1.5rem; }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 1.75rem;
+    }
+    .subject-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.86rem;
+      color: var(--text);
+      padding: 8px 10px;
+      background: var(--off-white);
+      border: 1px solid var(--gray-2);
+      border-radius: 8px;
+    }
+    .subject-item::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .career-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 0.5rem;
+    }
+    .career-tag {
+      background: var(--navy);
+      color: var(--white);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .course-detail-card { grid-template-columns: 1fr; }
+      .cdc-body { border-left: none; border-top: 1px solid var(--gray-2); }
+      .subjects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <nav class="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-mark"><span>MP</span></div>
+      <div class="logo-text-wrap">
+        <span class="logo-name">MIT Polytechnic</span>
+        <span class="logo-sub">Diploma Engineering College</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="courses.html" class="active">Courses</a></li>
+      <li><a href="admissions.html">Admissions</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="admissions.html" class="btn btn-primary" style="padding:0.55rem 1.3rem; font-size:0.85rem;">Apply Now</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="courses.html">Courses</a>
+    <a href="admissions.html">Admissions</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="sep">/</span>
+      <span>Courses</span>
+    </div>
+    <h1>Diploma Programs</h1>
+    <div class="gold-rule"></div>
+    <p class="page-hero-sub">
+      Three-year MSBTE-affiliated programs for students who have passed 10th standard.
+    </p>
+  </div>
+</div>
+
+<!-- INFO STRIP -->
+<div style="background:var(--off-white);border-bottom:1px solid var(--gray-2);padding:20px 1.5rem;">
+  <div class="container">
+    <div style="display:flex;gap:2.5rem;flex-wrap:wrap;align-items:center;justify-content:center;">
+      <div style="display:flex;align-items:center;gap:8px;font-size:0.88rem;color:var(--text);">
+        <span style="font-size:1.1rem;">📋</span>
+        <span><strong>Duration:</strong> 3 Years (6 Semesters)</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:0.88rem;color:var(--text);">
+        <span style="font-size:1.1rem;">🎓</span>
+        <span><strong>Board:</strong> MSBTE, Mumbai</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:0.88rem;color:var(--text);">
+        <span style="font-size:1.1rem;">📚</span>
+        <span><strong>Eligibility:</strong> SSC (10th) Pass</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;font-size:0.88rem;color:var(--text);">
+        <span style="font-size:1.1rem;">🏢</span>
+        <span><strong>Seats:</strong> 60 per branch</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COURSES DETAIL -->
+<section class="section">
+  <div class="container" style="display:flex;flex-direction:column;gap:2rem;">
+
+    <!-- AI & ML -->
+    <div class="course-detail-card" id="ai-ml">
+      <div class="cdc-sidebar" style="background:var(--navy);">
+        <div class="c-emoji">🤖</div>
+        <div class="c-code">Program Code · AIML</div>
+        <h2>AI &amp; Machine Learning</h2>
+        <div class="cdc-meta">
+          <div class="cdc-meta-item"><span>📅</span><span><strong>Duration:</strong> 3 Years</span></div>
+          <div class="cdc-meta-item"><span>💺</span><span><strong>Seats:</strong> 60</span></div>
+          <div class="cdc-meta-item"><span>🎓</span><span><strong>Board:</strong> MSBTE</span></div>
+          <div class="cdc-meta-item"><span>📚</span><span><strong>Eligibility:</strong> SSC Pass</span></div>
+        </div>
+        <a href="admissions.html" class="btn btn-primary" style="margin-top:1.5rem; justify-content:center;">Apply Now →</a>
+      </div>
+      <div class="cdc-body">
+        <p>
+          The Diploma in AI &amp; Machine Learning is one of the most sought-after
+          engineering programs in India today. Students learn the fundamentals of
+          Artificial Intelligence, Machine Learning, Data Science, and Python
+          programming — equipping them with skills in high demand across all industries.
+        </p>
+
+        <h3 style="margin-bottom:12px; font-size:1rem; color:var(--gold);">Key Subjects</h3>
+        <div class="subjects-grid">
+          <div class="subject-item">Python Programming</div>
+          <div class="subject-item">Data Structures &amp; Algorithms</div>
+          <div class="subject-item">Machine Learning Fundamentals</div>
+          <div class="subject-item">Data Analysis &amp; Visualization</div>
+          <div class="subject-item">Artificial Neural Networks</div>
+          <div class="subject-item">Database Management (SQL)</div>
+          <div class="subject-item">Computer Vision Basics</div>
+          <div class="subject-item">Final Year Project</div>
+        </div>
+
+        <h3 style="margin-bottom:10px; font-size:1rem; color:var(--gold);">Career Paths</h3>
+        <div class="career-tags">
+          <span class="career-tag">Data Analyst</span>
+          <span class="career-tag">ML Developer</span>
+          <span class="career-tag">Python Developer</span>
+          <span class="career-tag">IT Support Engineer</span>
+          <span class="career-tag">Higher Studies (B.E.)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Computer Engineering -->
+    <div class="course-detail-card" id="computer">
+      <div class="cdc-sidebar" style="background:var(--navy-mid);">
+        <div class="c-emoji">💻</div>
+        <div class="c-code">Program Code · CO</div>
+        <h2>Computer Engineering</h2>
+        <div class="cdc-meta">
+          <div class="cdc-meta-item"><span>📅</span><span><strong>Duration:</strong> 3 Years</span></div>
+          <div class="cdc-meta-item"><span>💺</span><span><strong>Seats:</strong> 60</span></div>
+          <div class="cdc-meta-item"><span>🎓</span><span><strong>Board:</strong> MSBTE</span></div>
+          <div class="cdc-meta-item"><span>📚</span><span><strong>Eligibility:</strong> SSC Pass</span></div>
+        </div>
+        <a href="admissions.html" class="btn btn-primary" style="margin-top:1.5rem; justify-content:center;">Apply Now →</a>
+      </div>
+      <div class="cdc-body">
+        <p>
+          The Diploma in Computer Engineering provides a solid foundation in computing,
+          programming, and software development. Students learn to build applications,
+          manage networks, design databases, and develop websites — preparing them for
+          roles in IT companies and the software industry.
+        </p>
+
+        <h3 style="margin-bottom:12px; font-size:1rem; color:var(--gold);">Key Subjects</h3>
+        <div class="subjects-grid">
+          <div class="subject-item">C, C++, Java Programming</div>
+          <div class="subject-item">Computer Networks &amp; Security</div>
+          <div class="subject-item">Database Management (DBMS)</div>
+          <div class="subject-item">Web Development (HTML/CSS/PHP)</div>
+          <div class="subject-item">Operating Systems</div>
+          <div class="subject-item">Software Engineering</div>
+          <div class="subject-item">Mobile App Basics</div>
+          <div class="subject-item">Final Year Project</div>
+        </div>
+
+        <h3 style="margin-bottom:10px; font-size:1rem; color:var(--gold);">Career Paths</h3>
+        <div class="career-tags">
+          <span class="career-tag">Software Developer</span>
+          <span class="career-tag">Web Developer</span>
+          <span class="career-tag">Network Administrator</span>
+          <span class="career-tag">IT Support</span>
+          <span class="career-tag">Higher Studies (B.E.)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mechanical Engineering -->
+    <div class="course-detail-card" id="mechanical">
+      <div class="cdc-sidebar" style="background:#142d52;">
+        <div class="c-emoji">⚙️</div>
+        <div class="c-code">Program Code · ME</div>
+        <h2>Mechanical Engineering</h2>
+        <div class="cdc-meta">
+          <div class="cdc-meta-item"><span>📅</span><span><strong>Duration:</strong> 3 Years</span></div>
+          <div class="cdc-meta-item"><span>💺</span><span><strong>Seats:</strong> 60</span></div>
+          <div class="cdc-meta-item"><span>🎓</span><span><strong>Board:</strong> MSBTE</span></div>
+          <div class="cdc-meta-item"><span>📚</span><span><strong>Eligibility:</strong> SSC Pass</span></div>
+        </div>
+        <a href="admissions.html" class="btn btn-primary" style="margin-top:1.5rem; justify-content:center;">Apply Now →</a>
+      </div>
+      <div class="cdc-body">
+        <p>
+          The Diploma in Mechanical Engineering is one of the oldest and most versatile
+          engineering programs. Students develop strong skills in machine design,
+          manufacturing processes, thermodynamics, and CAD/CAM — qualifying them for
+          jobs in the automobile, production, and heavy machinery industries.
+        </p>
+
+        <h3 style="margin-bottom:12px; font-size:1rem; color:var(--gold);">Key Subjects</h3>
+        <div class="subjects-grid">
+          <div class="subject-item">Engineering Drawing &amp; CAD</div>
+          <div class="subject-item">Thermodynamics &amp; Heat Transfer</div>
+          <div class="subject-item">Manufacturing Processes</div>
+          <div class="subject-item">Machine Design &amp; Elements</div>
+          <div class="subject-item">Fluid Mechanics &amp; Hydraulics</div>
+          <div class="subject-item">Material Science</div>
+          <div class="subject-item">Workshop Practice</div>
+          <div class="subject-item">Final Year Project</div>
+        </div>
+
+        <h3 style="margin-bottom:10px; font-size:1rem; color:var(--gold);">Career Paths</h3>
+        <div class="career-tags">
+          <span class="career-tag">Production Engineer</span>
+          <span class="career-tag">Automobile Technician</span>
+          <span class="career-tag">CAD Designer</span>
+          <span class="career-tag">Maintenance Engineer</span>
+          <span class="career-tag">Higher Studies (B.E.)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Civil Engineering -->
+    <div class="course-detail-card" id="civil">
+      <div class="cdc-sidebar" style="background:#0d2040;">
+        <div class="c-emoji">🏗️</div>
+        <div class="c-code">Program Code · CE</div>
+        <h2>Civil Engineering</h2>
+        <div class="cdc-meta">
+          <div class="cdc-meta-item"><span>📅</span><span><strong>Duration:</strong> 3 Years</span></div>
+          <div class="cdc-meta-item"><span>💺</span><span><strong>Seats:</strong> 60</span></div>
+          <div class="cdc-meta-item"><span>🎓</span><span><strong>Board:</strong> MSBTE</span></div>
+          <div class="cdc-meta-item"><span>📚</span><span><strong>Eligibility:</strong> SSC Pass</span></div>
+        </div>
+        <a href="admissions.html" class="btn btn-primary" style="margin-top:1.5rem; justify-content:center;">Apply Now →</a>
+      </div>
+      <div class="cdc-body">
+        <p>
+          The Diploma in Civil Engineering trains students in structural design,
+          construction technology, and site management. With a focus on AutoCAD,
+          surveying, and project management, graduates are well-prepared for
+          opportunities in government infrastructure, real estate, and construction.
+        </p>
+
+        <h3 style="margin-bottom:12px; font-size:1rem; color:var(--gold);">Key Subjects</h3>
+        <div class="subjects-grid">
+          <div class="subject-item">Structural Analysis &amp; Design</div>
+          <div class="subject-item">Surveying &amp; Geomatics</div>
+          <div class="subject-item">Construction Materials &amp; Tech</div>
+          <div class="subject-item">AutoCAD for Civil</div>
+          <div class="subject-item">Soil Mechanics &amp; Foundation</div>
+          <div class="subject-item">Water Supply &amp; Sanitation</div>
+          <div class="subject-item">Quantity Estimation &amp; Costing</div>
+          <div class="subject-item">Final Year Project</div>
+        </div>
+
+        <h3 style="margin-bottom:10px; font-size:1rem; color:var(--gold);">Career Paths</h3>
+        <div class="career-tags">
+          <span class="career-tag">Site Engineer</span>
+          <span class="career-tag">AutoCAD Draftsman</span>
+          <span class="career-tag">Surveyor</span>
+          <span class="career-tag">Govt. Contractor</span>
+          <span class="career-tag">Higher Studies (B.E.)</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LATERAL ENTRY NOTE -->
+<section class="section section-alt" style="padding:52px 0;">
+  <div class="container" style="max-width:740px; text-align:center;">
+    <div class="section-label" style="justify-content:center;">After Your Diploma</div>
+    <h2 class="section-title">Lateral Entry to B.E. / B.Tech</h2>
+    <div style="width:40px;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:3px;margin:12px auto 20px;"></div>
+    <p>
+      After completing your diploma from MIT Polytechnic, you are eligible for
+      <strong>Direct Second Year (DSY)</strong> admission to B.E. / B.Tech programs
+      at any engineering college in Maharashtra — giving you a head-start in your
+      degree without repeating the first year.
+    </p>
+    <a href="admissions.html" class="btn btn-navy" style="margin-top:1.25rem;">Check Eligibility</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Found Your Program?</h2>
+    <p>Submit your enquiry and our admissions team will guide you through the next steps.</p>
+    <a href="admissions.html" class="btn btn-primary">Apply for Admission →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          <div class="logo">
+            <div class="logo-mark"><span>MP</span></div>
+            <div class="logo-text-wrap">
+              <span class="logo-name" style="color:#fff;">MIT Polytechnic</span>
+              <span class="logo-sub">Diploma Engineering College</span>
+            </div>
+          </div>
+        </div>
+        <p>Quality technical education in the heart of Marathwada, Maharashtra.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="admissions.html">Admissions</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="#ai-ml">AI &amp; ML</a></li>
+          <li><a href="#computer">Computer Engg.</a></li>
+          <li><a href="#mechanical">Mechanical Engg.</a></li>
+          <li><a href="#civil">Civil Engg.</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">📍 Near MIDC Waluj, Chh. Sambhajinagar</a></li>
+          <li><a href="tel:+912402345678">📞 +91 240 234 5678</a></li>
+          <li><a href="mailto:info@mitpolytechnic.edu.in">✉ info@mitpolytechnic.edu.in</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 MIT Polytechnic, Chhatrapati Sambhajinagar. All rights reserved.</p>
+      <div class="footer-affil">
+        <span>MSBTE Affiliated</span>
+        <span>DTE Approved</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
